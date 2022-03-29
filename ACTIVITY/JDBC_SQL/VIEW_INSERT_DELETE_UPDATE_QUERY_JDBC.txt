@@ -1,0 +1,150 @@
+INSERTION==============================================================================================================
+----------------------------------------------------------------------------------------------------------------------
+package task1;
+
+import java.sql.*;
+import java.util.*;
+
+
+public class test2 {
+	public static void main(String[] args) throws Exception {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Team Name\r");
+		String co= sc.nextLine();
+		System.out.println("Enter Player Name\r");
+		String play= sc.nextLine();
+		sc.nextLine();
+		System.out.println("Enter Runs\r");
+		int run= sc.nextInt();
+
+		System.out.println("Enter Team ID\r");
+		int tid= sc.nextInt();
+
+		System.out.println("Enter Skill Name\r");
+		String skill= sc.next();
+		sc.nextLine();
+		System.out.println("Enter player no\r");
+		int pno= sc.nextInt();
+		//Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/jdbc","root","Ritesh@123");
+		Statement st=con.createStatement();
+		st.execute("INSERT INTO team VALUES('"+co+"','"+play+"',"+run+","+tid+",'"+skill+"',"+pno+")");
+		System.out.println("Data INSERTED successfully ");
+		
+
+
+		sc.close();
+
+
+
+
+		}
+
+
+}
+
+UPDATE=======================================================================================================
+------------------------------------------------------------------------------------------------------------
+package task1;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class updateSOL {
+	
+
+	
+	
+
+	  public static void main(String[] args) {
+	   
+	   
+
+	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "Ritesh@123"); 
+	        Statement stmt = conn.createStatement();) {
+	      
+	      stmt.executeUpdate("update team set Teamname='MI' where Playernumber=5");
+	      System.out.println("Database updated successfully ");
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	  }
+	}
+
+
+
+
+
+
+
+
+
+
+
+DELETION================================================================================================
+-------------------------------------------------------------------------------------------------------
+package task1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DeleteSQL {
+	 public static void main(String[] args) {
+		   
+		   
+
+		    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "Ritesh@123"); 
+		        Statement stmt = conn.createStatement();) {
+		      
+		      stmt.executeUpdate("DELETE FROM team WHERE Playername='MS'");
+		      System.out.println("DELETION  successful ");
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    }
+		  }
+		}
+
+VIEW TABLE=========================================================================================================================
+------------------------------------------------------------------------------------------------------------------------------------
+package task1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class viewSQL {
+	public static void main(String[] args) {
+		   
+		   
+
+	    try { (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "Ritesh@123"); 
+	        Statement stmt = conn.createStatement();) 
+	    	ResultSet rs = stmt.executeQuery("SELECT * FROM team");
+	    	//ResultSet res= stmt.executeUpdate("select * from team");
+	      System.out.println("query run successful");
+	      while (rs.next()) {
+	            
+	            String team_name = rs.getString("Teanname");
+	            String P_name = rs.getString("Playername");
+	            int run = rs.getInt("Runs");
+	            int id = rs.getInt("Teamid");
+	            String skill = rs.getString("Skill");
+	            int P_number = rs.getInt("Playernumber");
+	            System.out.println(team_name+"   "+P_name+"    "+run+" "+id+" "+skill+" "+P_number);
+	      }
+	      catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    }
+
+}
+}
+
+
+
+
+
